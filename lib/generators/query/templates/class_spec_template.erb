@@ -1,0 +1,14 @@
+# frozen_string_literal: true
+
+RSpec.describe <%= @type.capitalize.pluralize %>::<%= class_name %><%= @type.capitalize %> do
+  <%- if scope?('public') -%>
+    <%- scope_methods('public').each do |method| -%>
+  describe '#<%= strip_scope(method, 'public') %>' do
+    <%= rspec_empty_message(strip_scope(method, 'public')) %>
+  end
+    
+    <%- end -%>
+  <%- else -%>
+  <%= rspec_empty_message %>
+  <%- end -%>
+end

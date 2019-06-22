@@ -1,0 +1,56 @@
+version: 2.1
+
+executors:
+  default:
+    working_directory: ~/nested-generators
+    docker:
+      - image: circleci/ruby:2.6.1
+        environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
+
+jobs:
+  install_build_lint_test:
+    executor: default
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+            - nested-generators-v1-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+            - nested-generators-v1-
+      - run:
+          name: Install bundler
+          command: |
+            echo 'export BUNDLER_VERSION=$(cat Gemfile.lock | tail -1 | tr -d " ")' >> $BASH_ENV
+            source $BASH_ENV
+            gem install bundler
+      - run:
+          name: Install bundle
+          command: bundle install --path vendor/bundle
+      - save_cache:
+          key: nested-generators-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run:
+          name: Build gem
+          command: gem build nested-generators.gemspec
+      - run:
+          name: Lint code
+          command: bundle exec rubocop
+      - run:
+          name: Unit tests
+          command: |
+            bundle exec rspec --profile 10 \
+                              --format progress
+      - store_artifacts:
+          path: coverage
+      - persist_to_workspace:
+          root: ~/
+          paths:
+            - nested-generators
+
+workflows:
+  install-build-lint-test:
+    jobs:
+      - install_build_lint_test
