@@ -1,5 +1,12 @@
 # frozen_string_literal: true
 
+require 'coveralls'
+require 'simplecov'
+
+SimpleCov.formatter = SimpleCov::Formatter::MultiFormatter.new([SimpleCov::Formatter::HTMLFormatter,
+                                                                Coveralls::SimpleCov::Formatter])
+SimpleCov.start
+
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
     expectations.include_chain_clauses_in_custom_matcher_descriptions = true

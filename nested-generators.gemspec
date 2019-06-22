@@ -16,5 +16,7 @@ Gem::Specification.new do |spec|
   spec.files                = Dir.glob('{lib}/**/*')
   spec.require_path         = 'lib'
   spec.post_install_message = 'Thanks for installing! See rails generate service --help for usage'
+  spec.add_development_dependency 'coveralls', '~> 0.8.23'
   spec.add_development_dependency 'rails', '~> 5.2.2'
+  spec.add_development_dependency 'simplecov', '~> 0.16.1'
 end

@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
-    - 'tmp/**/*'
+    - tmp/**/*
+    - vendor/**/*
 Documentation:
   Enabled: false
 Metrics/ModuleLength:
