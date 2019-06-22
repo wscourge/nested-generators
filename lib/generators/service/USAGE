@@ -1,0 +1,34 @@
+Description:
+    Generates ServiceObject and its corresponding RSpec test file. Accepts
+    scoped methods as arguments.
+
+    IMPORTANT: On the first run, it also generates ApplicationService class
+    file from which all further generated ServiceObjects inherit.
+
+Usage:
+    Pass the name of the ServiceObject, either CamelCased or under_scored, as
+    the first argument along with an optional list of its scoped method names.
+
+    For further instructions refer to the documentation at
+    https://github.com/wscourge/nested-generators#serviceobject-generator
+
+Examples:
+    rails generate service cucumber
+
+        In the app/services directory it creates a ServiceObject called
+        "CucumberService" containing single public "call" method and the
+        "ApplicationService" along with corresponding RSpec test file in the
+        spec/services directory.
+
+    rails generate service vegetables/tomato
+
+        In the app/services/vegetables directory it creates a ServiceObject
+        called "Vegetables::TomatoService" containing single public "call"
+        method along with corresponding RSpec test file in the
+        spec/services/vegetables.
+
+    rails generate service swat public:nuke "protected:arm!" "private:ready?"
+
+        Creates ServiceObject called "SwatService" with four methods: public
+        "call", public "nuke", protected "arm!" and private "ready?". Quote
+        method names with special characters.

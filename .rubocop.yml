@@ -1,0 +1,17 @@
+AllCops:
+  Exclude:
+    - tmp/**/*
+    - vendor/**/*
+Documentation:
+  Enabled: false
+Metrics/ModuleLength:
+  Exclude:
+    - '**/*_spec.rb'
+Metrics/BlockLength:
+  Exclude:
+    - '**/*_spec.rb'
+Style/BlockDelimiters:
+  Exclude:
+    - '**/*_generator_spec.rb'
+Metrics/LineLength:
+  Max: 120

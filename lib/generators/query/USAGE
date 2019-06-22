@@ -1,0 +1,29 @@
+Description:
+    Generates QueryObject and its corresponding RSpec test file. Accepts
+    scoped methods as arguments.
+
+Usage:
+    Pass the name of the QueryObject, either CamelCased or under_scored, as
+    the first argument along with an optional list of its scoped method names.
+
+    For further instructions refer to the documentation at
+    https://github.com/wscourge/nested-generators#queryobject-generator
+
+Examples:
+    rails generate query tomatoes
+
+        In the app/queries directory it creates a QueryObject called
+        "TomatoesQuery" along with corresponding RSpec test file in the
+        spec/queries directory.
+
+    rails generate query vegetables/potatoes
+
+        In the app/queries/vegetables directory it creates a QueryObject
+        called "Vegetables::PotatoesQuery" along with corresponding RSpec test
+        file in the spec/queries/vegetables.
+
+    rails generate query fruits public:fresh "protected:skip!" "private:fresh?"
+
+        Creates QueryObject called "FruitsQuery" with three methods: public
+        "fresh", protected "skip!" and private "fresh?". Quote method names with
+        special characters.
