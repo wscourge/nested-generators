@@ -1,0 +1,25 @@
+# frozen_string_literal: true
+
+<%= open_modules_nesting %><%= open_class %>
+<%= code_indent %>def initialize(relation)
+<%= code_indent %>  @relation = relation
+<%= code_indent %>end
+<%- SCOPES.each.with_index do |name, index| -%>
+  <%- if index.zero? -%>
+    <%- if scope?(name) -%>
+      <%- scope_methods(name).each do |method| %>
+<%= code_indent %>def <%= method.gsub("#{name}:", '') %>
+<%= code_indent %>end
+      <%- end -%>
+    <%- end -%>
+  <%- else -%>
+    <%- if scope?(name) -%><%- %>
+<%- %><%= code_indent %><%= name %>
+      <%- scope_methods(name).each do |method| %>
+<%= code_indent %>def <%= method.gsub("#{name}:", '') %>
+<%= code_indent %>end
+      <%- end -%>
+    <%- end -%>
+  <%- end -%>
+<%- end -%>
+<%= end_class %><%= close_modules_nesting %>
