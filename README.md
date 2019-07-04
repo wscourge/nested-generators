@@ -18,19 +18,17 @@ folders, the gem extends autoloaded `app` directory with other types (like
 
 ```
 app
-|___controllers
-|       application_controller.rb
-|       .
-|___jobs
-|       application_job.rb
-|       .
-|___models
-|       application_record.rb
-|       .
-|___queries
-|       .
-|___services
-        application_service.rb
+├── controllers
+│   ├── application_controller.rb
+│   └── concerns
+├── jobs
+│   └── application_job.rb
+├── models
+│   ├── application_record.rb
+│   └── concerns
+├── queries
+└── services
+    └── application_service.rb
 ```
 
 ## ServiceObject Generator
@@ -59,12 +57,13 @@ $ rails generate service PotatoPeel
 results in following:
 
 ```
-app
-|___services
-|      application_service.rb
-|      potato_peel_service.rb
-spec
-    potato_peel_service_spec.rb
+├── app
+│   └── services
+│       ├── application_service.rb
+│       └── potato_peel_service.rb
+├── spec
+    └── services
+        └── potato_peel_service_spec.rb
 ```
 
 so it gives us three files in total:
@@ -116,7 +115,7 @@ The second file contains `PotatoPeelService`, which inherits from the
 
 As you have probably noticed, `ServiceObjects` are placed in `Services` module.
 I like to keep those that way (hence _opinionated_), but thankfully Rails is
-smart enought to find their invocation without `Services::` prefix, so you can
+smart enough to find their invocation without `Services::` prefix, so you can
 use both:
 
 ```
@@ -214,14 +213,15 @@ The command call above results in the following:
 
 
 ```
-app
-|___services
-|   |   application_service.rb
-|   |___peelers
-|           potato_service.rb
-spec
-|___peelers
-        potato_service_spec.rb  
+├── app
+│   └── services
+│       ├── application_service.rb
+│       └── peelers
+│           └── potato_service.rb
+└── spec
+     └── services
+          └── peelers
+               └── potato_service_spec.rb
 ```
 
 **file 1:** _app/services/peelers/potato_service.rb_
@@ -330,12 +330,12 @@ $ rails generate query rotten_potatoes
 results in following:
 
 ```
-app
-|___queries
-|       rotten_potatoes_query.rb
-spec
-|___queries
-        rotten_potatoes_query_spec.rb
+├── app
+│   └── queries
+│        └── rotten_potatoes_query.rb
+└── spec
+     └── queries
+          └── rotten_potatoes_query_spec.rb
 ```
 
 so it gives us two files in total:
@@ -360,7 +360,7 @@ variable.
 
 As you have probably noticed, `QueryObjects` are placed in `Queries` module,
 just like `ServiceObjects` are placed in the `Services` module. I like to keep
-those that way (hence _opinionated_), but thankfully Rails is smart enought to
+those that way (hence _opinionated_), but thankfully Rails is smart enough to
 find their invocation without `Queries::` prefix, so you can use both:
 
 ```
@@ -450,13 +450,15 @@ The command call above results in the following:
 
 
 ```
-app
-|___queries
-|   |___rotten_vegetables
-|           potatoes_query.rb
-spec
-|___rotten_vegetables
-        potatoes_query_spec.rb  
+├── app
+│   └── queries
+│       └── rotten_vegetables
+│           └── potatoes_query.rb
+└── spec
+     └── queries
+          └── rotten_vegetables
+              └── potatoes_query_spec.rb
+
 ```
 
 **file 1:** _app/queries/rotten_vegetables/potatoes_query.rb_
